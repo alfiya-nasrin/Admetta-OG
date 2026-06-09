@@ -1,0 +1,69 @@
+.section {
+  width: 100%;
+  background: #000000;
+  padding: 0;
+  overflow: hidden;
+}
+
+.grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+/* 5-column — 15 posters, slightly larger cards */
+.section[data-cols="5"] .grid {
+  max-width: 1180px;
+  padding-inline: max(48px, calc((100% - 1180px) / 2));
+}
+
+.section[data-cols="4"] .grid {
+  max-width: 1020px;
+  padding-inline: max(40px, calc((100% - 1020px) / 2));
+}
+
+.section[data-cols="3"] .grid,
+.section[data-cols="2"] .grid {
+  max-width: none;
+  padding-inline: 28px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: #000;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .section[data-cols="3"] .grid,
+  .section[data-cols="2"] .grid {
+    padding-inline: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section[data-cols="3"] .grid,
+  .section[data-cols="2"] .grid {
+    padding-inline: 16px;
+  }
+}

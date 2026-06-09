@@ -1,0 +1,144 @@
+/* Our Clients — white bg, 5×3 marquee rows */
+
+.section {
+  padding: clamp(72px, 9vh, 112px) 0;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.container {
+  width: min(1200px, 100% - clamp(96px, 20vw, 240px));
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.heading {
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111111;
+  margin: 0;
+}
+
+.marqueeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(80px, 9vw, 100px);
+  width: 100%;
+  max-width: min(1280px, 100% - clamp(120px, 22vw, 320px));
+  margin-inline: auto;
+  padding-inline: clamp(64px, 12vw, 160px);
+  box-sizing: border-box;
+}
+
+.marqueeWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: clamp(28px, 4.5vw, 52px);
+  padding-inline: clamp(8px, 2vw, 24px);
+}
+
+.trackLeft {
+  animation: swipeLeft5 28s linear infinite;
+}
+
+.trackRight {
+  animation: swipeRight5 28s linear infinite;
+}
+
+.marqueeTrack:hover {
+  animation-play-state: paused;
+}
+
+/* Stepped swipe — 5 logos per row */
+@keyframes swipeLeft5 {
+  0% { transform: translateX(0); }
+  16.6% { transform: translateX(0); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  20% { transform: translateX(-10%); }
+  36.6% { transform: translateX(-10%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  40% { transform: translateX(-20%); }
+  56.6% { transform: translateX(-20%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  60% { transform: translateX(-30%); }
+  76.6% { transform: translateX(-30%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  80% { transform: translateX(-40%); }
+  96.6% { transform: translateX(-40%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes swipeRight5 {
+  0% { transform: translateX(-50%); }
+  16.6% { transform: translateX(-50%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  20% { transform: translateX(-40%); }
+  36.6% { transform: translateX(-40%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  40% { transform: translateX(-30%); }
+  56.6% { transform: translateX(-30%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  60% { transform: translateX(-20%); }
+  76.6% { transform: translateX(-20%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  80% { transform: translateX(-10%); }
+  96.6% { transform: translateX(-10%); animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+  100% { transform: translateX(0); }
+}
+
+.logoCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: clamp(170px, calc((100vw - clamp(240px, 44vw, 640px)) / 5), 240px);
+  min-height: 88px;
+  padding: 14px 16px;
+  background: transparent;
+}
+
+.logoImg {
+  max-height: 78px;
+  max-width: 190px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .marqueeContainer {
+    padding-inline: clamp(48px, 9vw, 100px);
+    max-width: none;
+  }
+
+  .logoCell {
+    width: clamp(150px, calc((100vw - 160px) / 4), 220px);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 56px 0;
+  }
+
+  .marqueeContainer {
+    padding-inline: 32px;
+    gap: 64px;
+  }
+
+  .logoCell {
+    width: clamp(130px, calc((100vw - 80px) / 3), 180px);
+    min-height: 72px;
+  }
+
+  .logoImg {
+    max-height: 60px;
+    max-width: 150px;
+  }
+}
