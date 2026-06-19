@@ -282,7 +282,7 @@ span.brand-mark::after {
 .btn-primary {
   border-color: var(--accent);
   background: var(--accent);
-  color: var(--text);
+  color: #000000;
   box-shadow: 0 14px 35px rgba(255, 46, 147, 0.22);
 }
 
@@ -567,7 +567,7 @@ h3 {
 
 .cta-band,
 .mission-band {
-  padding: 100px 0;
+  padding: clamp(48px, 10vw, 100px) 0;
   background: #0a0312; /* unified dark — same canvas as rest of site */
   border-top: 1px solid rgba(255, 46, 147, 0.12);
   border-bottom: 1px solid rgba(255, 46, 147, 0.06);
@@ -585,12 +585,17 @@ h3 {
 }
 
 .cta-inner {
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
 }
 
 .cta-inner h2,
 .mission-band h2 {
   max-width: 780px;
+  font-weight: 500;
+  margin: 0;
 }
 
 .two-column,
@@ -834,6 +839,7 @@ textarea:focus {
 
 .contact-info h2 {
   font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 500;
 }
 
 .contact-info > a:not(.btn) {
@@ -1000,8 +1006,15 @@ textarea:focus {
 
   .split-heading,
   .cta-inner {
-    display: grid;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .cta-band,
+  .mission-band {
+    padding: 32px 0 !important;
   }
 
   .feature-grid,

@@ -5,7 +5,8 @@ import styles from "./PosterMasonry.module.css";
 const COLUMN_OFFSETS_5 = [100, 0, 72, 0, 100];
 const COLUMN_OFFSETS_4 = [95, 0, 95, 0];
 const COLUMN_OFFSETS_3 = [80, 0, 80];
-const COLUMN_OFFSETS_2 = [70, 0];
+const COLUMN_OFFSETS_3_MOBILE = [32, 0, 32];
+const COLUMN_OFFSETS_2 = [32, 0];
 
 // 3 posters per column × 5 cols = 15
 const LAYOUT_BY_COLUMN_COUNT = {
@@ -43,23 +44,18 @@ const CROP_POSITIONS = [
 ];
 
 function getOffsets(columnCount) {
-  switch (columnCount) {
-    case 5:
-      return COLUMN_OFFSETS_5;
-    case 4:
-      return COLUMN_OFFSETS_4;
-    case 3:
-      return COLUMN_OFFSETS_3;
-    default:
-      return COLUMN_OFFSETS_2;
+  if (typeof window !== "undefined" && window.innerWidth <= 768) {
+    // Scale down the 5-column offsets for mobile screens
+    return [32, 0, 24, 0, 32];
   }
+  return COLUMN_OFFSETS_5;
 }
 
 function buildColumns(columnCount) {
-  const layout = LAYOUT_BY_COLUMN_COUNT[columnCount];
+  const layout = LAYOUT_BY_COLUMN_COUNT[5];
   if (!layout) {
-    const columns = Array.from({ length: columnCount }, () => []);
-    posters.forEach((poster, idx) => columns[idx % columnCount].push(poster));
+    const columns = Array.from({ length: 5 }, () => []);
+    posters.forEach((poster, idx) => columns[idx % 5].push(poster));
     return columns;
   }
 
@@ -68,10 +64,7 @@ function buildColumns(columnCount) {
 }
 
 function getColumnCount(width) {
-  if (width < 480) return 2;
-  if (width < 768) return 3;
-  if (width < 1200) return 4;
-  return 5;
+  return 5; // Force exact original 5-column layout everywhere
 }
 
 function getCrop(poster, colIndex, cardIdx) {
@@ -110,13 +103,17 @@ export default function PosterMasonry() {
             >
               {columnItems.map((poster, cardIdx) => (
                 <article key={poster.id} className={styles.card}>
-                  <img
-                    src={poster.src}
-                    alt={poster.title}
-                    className={styles.cardImage}
-                    loading="lazy"
-                    style={{ objectPosition: getCrop(poster, colIndex, cardIdx) }}
-                  />
+                  <picture>
+                    {poster.srcWebp && <source srcSet={poster.srcWebp} type="image/webp" />}
+                    <img
+                      src={poster.src}
+                      alt={poster.title}
+                      className={styles.cardImage}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ objectPosition: getCrop(poster, colIndex, cardIdx) }}
+                    />
+                  </picture>
                 </article>
               ))}
             </div>

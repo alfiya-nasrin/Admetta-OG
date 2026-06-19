@@ -112,33 +112,53 @@
 }
 
 @media (max-width: 1024px) {
+  .container {
+    width: min(1200px, 100% - 64px);
+  }
+
   .marqueeContainer {
-    padding-inline: clamp(48px, 9vw, 100px);
+    padding-inline: clamp(24px, 5vw, 64px);
     max-width: none;
   }
 
   .logoCell {
-    width: clamp(150px, calc((100vw - 160px) / 4), 220px);
+    width: clamp(150px, calc((100vw - 120px) / 4), 220px);
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 56px 0;
+    padding: 40px 0;
+  }
+
+  .container {
+    width: 100%;
+    padding-inline: 20px;
+    margin-bottom: 32px;
   }
 
   .marqueeContainer {
-    padding-inline: 32px;
-    gap: 64px;
+    padding-inline: 0px;
+    gap: 40px;
+  }
+
+  .marqueeTrack {
+    gap: 0;
+    padding-inline: 0;
   }
 
   .logoCell {
-    width: clamp(130px, calc((100vw - 80px) / 3), 180px);
-    min-height: 72px;
+    /* 4 logos on screen. Total viewport width = 100vw.
+       We want 4 logos and 4 margins to equal 100vw so the animation math (-10%) is flawless.
+       Let margin = 16px to fit more logos. */
+    width: calc((100vw - 64px) / 4);
+    margin-right: 16px;
+    min-height: 56px;
+    padding: 8px;
   }
 
   .logoImg {
-    max-height: 60px;
-    max-width: 150px;
+    max-height: 40px;
+    max-width: 90px;
   }
 }

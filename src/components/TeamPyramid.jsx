@@ -14,15 +14,18 @@ const PLACEMENT = {
 function TeamCard({ member }) {
   return (
     <figure className={`${styles.card} ${PLACEMENT[member.id]}`}>
-      <img
-        src={member.image}
-        alt={member.alt}
-        className={styles.photo}
-        width={member.width}
-        height={member.height}
-        decoding="async"
-        loading="lazy"
-      />
+      <picture>
+        {member.imageWebp && <source srcSet={member.imageWebp} type="image/webp" />}
+        <img
+          src={member.image}
+          alt={member.alt}
+          className={styles.photo}
+          width={member.width}
+          height={member.height}
+          decoding="async"
+          loading="lazy"
+        />
+      </picture>
     </figure>
   );
 }

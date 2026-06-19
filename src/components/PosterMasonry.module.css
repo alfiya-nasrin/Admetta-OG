@@ -55,15 +55,21 @@
 }
 
 @media (max-width: 768px) {
+  .section[data-cols="5"] .grid,
   .section[data-cols="3"] .grid,
   .section[data-cols="2"] .grid {
-    padding-inline: 24px;
+    padding-inline: 16px;
   }
 }
 
 @media (max-width: 480px) {
+  .section[data-cols="5"] .grid,
   .section[data-cols="3"] .grid,
   .section[data-cols="2"] .grid {
-    padding-inline: 16px;
+    padding-inline: 8px;
+    gap: 3px;
+  }
+  .column {
+    gap: 3px;
   }
 }

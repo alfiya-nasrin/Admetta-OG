@@ -8,6 +8,13 @@ export default function HomeTeamAbout() {
     <section className={styles.section} aria-labelledby="home-about-heading">
       <div className={styles.inner}>
         <div className={styles.teamCol}>
+          <div className={styles.sideTextWrap}>
+            <span className={styles.sideText}>
+              <span>TEAM</span>
+              <span>ADMETTA</span>
+            </span>
+            <div className={styles.sideLine} />
+          </div>
           <div className={styles.pyramidWrap}>
             <TeamPyramid compact />
           </div>

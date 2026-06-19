@@ -1,8 +1,13 @@
 import React from "react";
 import styles from "./OurClients.module.css";
 
-const imageModules = import.meta.glob(
-  "../assets/css/clientlogos/*.{png,jpg,jpeg,svg,webp}",
+const standardImages = import.meta.glob(
+  "../assets/css/clientlogos/*.{png,jpg,jpeg,svg}",
+  { eager: true }
+);
+
+const webpImages = import.meta.glob(
+  "../assets/css/clientlogos/*.webp",
   { eager: true }
 );
 
@@ -45,12 +50,19 @@ function formatBrandName(filename) {
     .join(" ");
 }
 
-const allLogos = Object.entries(imageModules)
+const allLogos = Object.entries(standardImages)
   .map(([path, mod]) => {
     const filename = path.split("/").pop();
+    const basename = filename.replace(/\.[^/.]+$/, "");
+    
+    // Find matching webp
+    const webpPath = Object.keys(webpImages).find(p => p.includes(`${basename}.webp`));
+    const webpSrc = webpPath ? (webpImages[webpPath].default || webpImages[webpPath]) : null;
+
     return {
       id: filename,
       src: mod.default || mod,
+      srcWebp: webpSrc,
       name: formatBrandName(filename),
     };
   })
@@ -68,14 +80,35 @@ const MARQUEE_ROWS = [
 ];
 
 function LogoCell({ logo }) {
+  const basename = logo.id.replace(/\.[^/.]+$/, "").toLowerCase();
+  
+  let imgStyle = {};
+  if (basename === "group 786") {
+    // Ladies Planet
+    imgStyle = { backgroundColor: "#080510", borderRadius: "12px", padding: "16px 28px" };
+  } else if (basename === "edway new logo") {
+    // Edway
+    imgStyle = { backgroundColor: "#2d0c57", borderRadius: "99px", padding: "12px 32px" };
+  } else if (basename === "phone cart") {
+    // Phone Cart
+    imgStyle = { backgroundColor: "#1c1c1c", borderRadius: "6px", padding: "14px 28px" };
+  }
+
   return (
     <div className={styles.logoCell} title={logo.name} aria-label={logo.name}>
-      <img
-        src={logo.src}
-        alt={`${logo.name} logo`}
-        className={styles.logoImg}
-        loading="lazy"
-      />
+      <picture>
+        {logo.srcWebp && <source srcSet={logo.srcWebp} type="image/webp" />}
+        <img
+          src={logo.src}
+          alt={`${logo.name} logo`}
+          className={styles.logoImg}
+          loading="lazy"
+          decoding="async"
+          width="200"
+          height="100"
+          style={imgStyle}
+        />
+      </picture>
     </div>
   );
 }

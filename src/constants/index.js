@@ -17,8 +17,8 @@ import workShop from "../assets/images/work-shop.svg";
 import workSocial from "../assets/images/work-social.svg";
 import workWeb from "../assets/images/work-web.svg";
 
-export const whatsappUrl = "https://wa.me/91XXXXXXXXXX";
-export const email = "Infoadmetta@gmail.com";
+export const whatsappUrl = "https://wa.me/917012134334";
+export const email = "admetta@gmail.com";
 
 export const images = {
   logo: admettaLogo,

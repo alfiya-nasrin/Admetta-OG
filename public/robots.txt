@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://admetta.com/sitemap.xml
+
+# Core Web Vitals / JS / CSS crawling is allowed automatically by "Allow: /"
