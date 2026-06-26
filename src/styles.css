@@ -937,6 +937,11 @@ h3 {
   box-shadow: 0 0 0 2px rgba(255, 46, 147, 0.2) !important;
 }
 
+.field select option {
+  background: var(--bg) !important;
+  color: #ffffff !important;
+}
+
 .contact-form .btn-primary {
   grid-column: 1 / -1 !important;
   justify-self: start !important;
